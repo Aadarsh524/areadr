@@ -74,7 +74,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/lang
+    - assets/lang/en.json
+    - assets/lang/es.json
 
   # fonts:
   #   - family: Schyler
