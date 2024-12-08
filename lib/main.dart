@@ -1,14 +1,18 @@
 import 'package:areadr/configs/localizations/localization_delegates.dart';
 import 'package:areadr/configs/routes.dart';
 import 'package:areadr/configs/themes/theme_service.dart';
+import 'package:areadr/firebase_options.dart';
 import 'package:areadr/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 final getIt = GetIt.instance;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   getIt.registerLazySingleton(() => ThemeService());
   getIt.registerLazySingleton(() => const AppLocalizationDelegate());
 

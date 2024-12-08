@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "785851859485",
+    "project_id": "areadr-8ba75",
+    "storage_bucket": "areadr-8ba75.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785851859485:android:a2529556103aa5de0dbcf4",
+        "android_client_info": {
+          "package_name": "com.areadr.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785851859485-nu711eo3qn6f10bfr7rmrq2edvung7dm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGonaBd3L1_kzDK1Z2ZRMk5iftbOdhdNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785851859485-nu711eo3qn6f10bfr7rmrq2edvung7dm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "785851859485-scdufejopipjeundrijklfktn94h2ikp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.areadr"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

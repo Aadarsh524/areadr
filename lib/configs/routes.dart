@@ -1,4 +1,5 @@
 import 'package:areadr/layers/presentation/home_screen.dart';
+import 'package:areadr/layers/presentation/login_screen.dart';
 import 'package:areadr/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case login:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
 
       default:
         return MaterialPageRoute(

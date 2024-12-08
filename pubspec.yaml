@@ -48,6 +48,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   get_it: ^8.0.2
+  google_sign_in: ^6.0.1
+  firebase_core: ^2.17.0
+  firebase_auth: ^4.10.0
+  cloud_firestore: ^4.6.0
+  firestore_ui: ^1.24.0
+  firebase_storage: ^11.2.3
 
 dev_dependencies:
   flutter_test:
