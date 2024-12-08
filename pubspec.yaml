@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   flutter_bloc: ^8.1.6
+  bloc:
   equatable: ^2.0.7
   dio: ^5.7.0
   retrofit: ^4.4.1

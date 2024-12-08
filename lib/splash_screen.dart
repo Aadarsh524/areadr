@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home');
-    });
+    _checkLoginStatus(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -15,7 +14,6 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // App Name
             const Text(
               'Areadr',
               style: TextStyle(
@@ -25,7 +23,6 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Tagline or Subtitle
             Text(
               'Bringing News to Life',
               style: TextStyle(
@@ -37,5 +34,18 @@ class SplashScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _checkLoginStatus(BuildContext context) async {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    // Wait for 3 seconds and navigate based on authentication status
+    Future.delayed(const Duration(seconds: 3), () {
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.pushReplacementNamed(context, '/login');
+      }
+    });
   }
 }
