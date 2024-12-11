@@ -12,31 +12,24 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 final getIt = GetIt.instance;
 
+void setupLocator() {
+  getIt.registerSingleton<ThemeService>(ThemeService());
+  getIt.registerLazySingleton(() => const AppLocalizationDelegate());
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  getIt.registerLazySingleton(() => ThemeService());
-  getIt.registerLazySingleton(() => const AppLocalizationDelegate());
+  setupLocator();
+
+  final themeService = GetIt.I<ThemeService>();
+  await themeService.loadThemeMode(); // Load saved theme mode
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  // Track theme mode
-  bool isDarkMode = false;
-
-  void toggleTheme() {
-    setState(() {
-      isDarkMode = !isDarkMode;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +41,15 @@ class _MyAppState extends State<MyApp> {
           create: (context) => AuthCubit(),
         ),
       ],
-      child: AnimatedBuilder(
-        animation: ValueNotifier(themeService.themeMode),
-        builder: (context, _) {
+      child: ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeService.themeNotifier,
+        builder: (context, themeMode, _) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'appTitle',
-            theme: themeService.lightTheme,
-            darkTheme: themeService.darkTheme,
-            themeMode: themeService.themeMode,
+            theme: ThemeData.light(), // Add your custom light theme if any
+            darkTheme: ThemeData.dark(), // Add your custom dark theme if any
+            themeMode: themeMode, // Dynamically changes based on ThemeService
             initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRoutes.generateRoute,
             supportedLocales: const [

@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeService {
-  // Default theme mode
-  ThemeMode _themeMode = ThemeMode.light;
+  final ValueNotifier<ThemeMode> _themeNotifier =
+      ValueNotifier(ThemeMode.light);
+  ValueNotifier<ThemeMode> get themeNotifier => _themeNotifier;
 
-  ThemeMode get themeMode => _themeMode;
+  ThemeMode get themeMode => _themeNotifier.value;
 
-  // Switch between light and dark theme
   void toggleTheme() {
-    _themeMode =
-        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    _themeNotifier.value = _themeNotifier.value == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
+    print("Theme changed to: ${_themeNotifier.value}");
+    saveThemeMode(_themeNotifier.value);
   }
 
-  // Get the corresponding ThemeData for the active ThemeMode
-  ThemeData get lightTheme => ThemeData.light().copyWith(
-        primaryColor: Colors.blueAccent,
-      );
+  Future<void> saveThemeMode(ThemeMode themeMode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("themeMode", themeMode.name);
+    print("Theme saved as: ${themeMode.name}");
+  }
 
-  ThemeData get darkTheme => ThemeData.dark().copyWith(
-        primaryColor: Colors.blueAccent,
-      );
+  Future<void> loadThemeMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final themeName = prefs.getString("themeMode") ?? ThemeMode.system.name;
+    _themeNotifier.value =
+        ThemeMode.values.firstWhere((e) => e.name == themeName);
+    print("Loaded theme: ${_themeNotifier.value}");
+  }
 }

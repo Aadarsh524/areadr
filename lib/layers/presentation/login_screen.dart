@@ -1,7 +1,9 @@
+import 'package:areadr/configs/themes/theme_service.dart';
 import 'package:areadr/cores/constants/colors.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:areadr/cores/widgets/custom_carousel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,10 +19,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _saveNewLoginStatus(bool isNewLogin) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('newLogin', isNewLogin);
+    if (!mounted) return;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent, // Transparent for rounded corners
+      backgroundColor: Colors.transparent,
       builder: (context) => FractionallySizedBox(
         heightFactor: 0.40, // Half the screen height
         child: GoogleSignInScreen(isNewLogin: isNewLogin),
@@ -30,9 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = GetIt.I<ThemeService>();
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Stack(
           children: [
             Column(
@@ -41,58 +45,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.topRight,
                   child: TextButton(
                     onPressed: () {
-                      // Add skip action, for example navigate to the next screen
+                      themeService.toggleTheme();
                     },
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.primary,
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    ),
-                    child: const Text(
+                    child: Text(
                       "Skip",
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 1, // Adjust flex for 50% of screen height
-                  child: CarouselSlider(
-                    items: [
-                      buildCarouselImage("assets/images/first.png"),
-                      buildCarouselImage("assets/images/second.png"),
-                      buildCarouselImage("assets/images/third.png"),
-                    ],
-                    options: CarouselOptions(
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          currentIndex = index;
-                        });
-                      },
-                      autoPlay: true,
-                      height: double.infinity,
-                      viewportFraction: 1.0,
-                      enlargeCenterPage: false,
-                      aspectRatio:
-                          16 / 9, // Maintain aspect ratio for responsiveness
-                      enableInfiniteScroll:
-                          true, // Infinite scrolling of images
-                      autoPlayInterval:
-                          const Duration(seconds: 3), // Auto play interval
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child:
-                      DotsIndicator(currentIndex: currentIndex, totalDots: 3),
-                ),
+                const Expanded(
+                    flex: 1, // Adjust flex for 50% of screen height
+                    child: CustomCarousel(
+                      imagePaths: [
+                        'assets/images/first.png',
+                        'assets/images/second.png',
+                        'assets/images/third.png'
+                      ],
+                    )),
 
                 // Horizontal Silver Line Separator
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Container(
                     height: 1,
                     color: AppColors.secondary, // Silver line color
@@ -121,11 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     8.0), // Rounded corners
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Get Started Now",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                           OutlinedButton(
@@ -214,12 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             // App Title with a responsive font size
                             Text(
                               "Audio delivery of news",
-                              style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width *
-                                    0.07, // Adjust text size based on screen width
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.black,
-                              ),
+                              style: Theme.of(context).textTheme.displayLarge,
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -232,50 +198,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             // Skip Button positioned at the top-right corner
           ],
-        ),
-      ),
-    );
-  }
-}
-
-Widget buildCarouselImage(String imagePath) {
-  return Container(
-    height: 250, // Increased height for better visibility
-    width: double.infinity,
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: AssetImage(imagePath),
-        fit: BoxFit.cover,
-      ),
-    ),
-  );
-}
-
-class DotsIndicator extends StatelessWidget {
-  final int currentIndex;
-  final int totalDots;
-
-  const DotsIndicator({
-    super.key,
-    required this.currentIndex,
-    required this.totalDots,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        totalDots,
-        (index) => AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 4.0),
-          height: 8,
-          width: index == currentIndex ? 12 : 8,
-          decoration: BoxDecoration(
-            color: index == currentIndex ? Colors.black : Colors.grey,
-            borderRadius: BorderRadius.circular(4),
-          ),
         ),
       ),
     );
@@ -338,13 +260,9 @@ class GoogleSignInScreen extends StatelessWidget {
               height: 24,
               width: 24,
             ),
-            label: const Padding(
-              padding: EdgeInsets.only(
-                  left: 30), // Adds padding to the left of the text
-              child: Text(
-                "Sign In with Google",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
+            label: const Text(
+              "Sign In with Google",
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             style: ElevatedButton.styleFrom(
               foregroundColor: AppColors.white,
