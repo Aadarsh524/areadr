@@ -1,4 +1,3 @@
-import 'package:areadr/cores/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -47,13 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
               child: AnimatedOpacity(
                 opacity: _opacity,
                 duration: const Duration(seconds: 1),
-                child: const Text(
+                child: Text(
                   'Areadr',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.black, // Use your defined color
-                  ),
+                  style: Theme.of(context).textTheme.displayLarge,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

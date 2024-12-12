@@ -3,7 +3,7 @@ import 'package:areadr/cores/constants/fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static final ThemeData lightTheme = ThemeData(
+  static final ThemeData customLightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
@@ -12,7 +12,7 @@ class AppThemes {
       backgroundColor: AppColors.white,
       elevation: 0,
       titleTextStyle: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -20,68 +20,68 @@ class AppThemes {
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
       headlineLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 20,
+        fontSize: 24,
       ),
       titleLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
-        fontSize: 20,
+        fontSize: 24,
       ),
       bodyLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
-        fontSize: 20,
+        fontSize: 24,
       ),
       labelLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
-        fontSize: 20,
+        fontSize: 24,
       ),
       headlineMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 16,
+        fontSize: 18,
       ),
       titleMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
-        fontSize: 16,
+        fontSize: 18,
       ),
       bodyMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
-        fontSize: 16,
+        fontSize: 18,
       ),
       labelMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
-        fontSize: 16,
+        fontSize: 18,
       ),
       headlineSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
         fontSize: 12,
       ),
       titleSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
         fontSize: 12,
       ),
       bodySmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
         fontSize: 12,
       ),
       labelSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
         fontSize: 12,
       ),
@@ -93,7 +93,7 @@ class AppThemes {
   );
 
   // Dark Theme with custom font
-  static final ThemeData darkTheme = ThemeData(
+  static final ThemeData customDarkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: AppColors.primary,
@@ -102,7 +102,7 @@ class AppThemes {
       backgroundColor: Colors.black,
       elevation: 0,
       titleTextStyle: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: Colors.white,
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -110,68 +110,68 @@ class AppThemes {
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
       headlineLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
         fontSize: 24,
       ),
       titleLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
         fontSize: 24,
       ),
       bodyLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
         fontSize: 24,
       ),
       labelLarge: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
         fontSize: 24,
       ),
       headlineMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
-        fontSize: 16,
+        fontSize: 18,
       ),
       titleMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
-        fontSize: 16,
+        fontSize: 18,
       ),
       bodyMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 16,
+        fontSize: 18,
       ),
       labelMedium: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
-        fontSize: 16,
+        fontSize: 18,
       ),
       headlineSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
         fontSize: 12,
       ),
       titleSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
         fontSize: 12,
       ),
       bodySmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
         fontSize: 12,
       ),
       labelSmall: TextStyle(
-        fontFamily: Fonts.customFontFamily,
+        fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
         fontSize: 12,
       ),

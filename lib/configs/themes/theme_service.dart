@@ -12,14 +12,12 @@ class ThemeService {
     _themeNotifier.value = _themeNotifier.value == ThemeMode.light
         ? ThemeMode.dark
         : ThemeMode.light;
-    print("Theme changed to: ${_themeNotifier.value}");
     saveThemeMode(_themeNotifier.value);
   }
 
   Future<void> saveThemeMode(ThemeMode themeMode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("themeMode", themeMode.name);
-    print("Theme saved as: ${themeMode.name}");
   }
 
   Future<void> loadThemeMode() async {
@@ -27,6 +25,5 @@ class ThemeService {
     final themeName = prefs.getString("themeMode") ?? ThemeMode.system.name;
     _themeNotifier.value =
         ThemeMode.values.firstWhere((e) => e.name == themeName);
-    print("Loaded theme: ${_themeNotifier.value}");
   }
 }

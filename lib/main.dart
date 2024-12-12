@@ -1,6 +1,7 @@
 import 'package:areadr/configs/localizations/localization_delegates.dart';
 import 'package:areadr/configs/routes.dart';
 import 'package:areadr/configs/themes/theme_service.dart';
+import 'package:areadr/configs/themes/themes.dart';
 import 'package:areadr/firebase_options.dart';
 import 'package:areadr/layers/blocs/cubits/auth_cubit.dart';
 import 'package:areadr/splash_screen.dart';
@@ -47,9 +48,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'appTitle',
-            theme: ThemeData.light(), // Add your custom light theme if any
-            darkTheme: ThemeData.dark(), // Add your custom dark theme if any
-            themeMode: themeMode, // Dynamically changes based on ThemeService
+            theme: AppThemes.customLightTheme,
+            darkTheme: AppThemes.customDarkTheme,
+            themeMode: themeMode,
             initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRoutes.generateRoute,
             supportedLocales: const [
