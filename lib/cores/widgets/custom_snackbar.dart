@@ -1,10 +1,11 @@
+import 'package:areadr/cores/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSnackbar {
   static void showSnackbar({
     required BuildContext context,
     required String message,
-    Color backgroundColor = Colors.black,
+    Color backgroundColor = AppColors.primary,
     Color textColor = Colors.white,
     Duration duration = const Duration(seconds: 3),
     IconData? icon,
@@ -20,7 +21,7 @@ class CustomSnackbar {
             Expanded(
               child: Text(
                 message,
-                style: TextStyle(color: textColor),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
           ],

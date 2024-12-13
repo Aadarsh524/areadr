@@ -25,6 +25,7 @@ void main() async {
 
   final themeService = GetIt.I<ThemeService>();
   await themeService.loadThemeMode(); // Load saved theme mode
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }

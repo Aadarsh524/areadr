@@ -7,8 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthCubit extends Cubit<AuthState> {
   User? user = FirebaseAuth.instance.currentUser;
 
-  FirebaseAuth? _firebaseAuth;
-  GoogleSignIn? _googleSignIn;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // Initialize Google Sign-In and Firebase Auth
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+      // scopes: [
+      //   'https://www.googleapis.com/auth/userinfo.profile',
+      //   'https://www.googleapis.com/auth/contacts.readonly',
+      // ],
+      );
 
   AuthCubit() : super(AuthInitial());
 
@@ -20,37 +26,22 @@ class AuthCubit extends Cubit<AuthState> {
       await prefs.setBool('newLogin', isNewLogin);
 
       // Perform the Google sign-in process
-      final GoogleSignInAccount? googleUser = await _googleSignIn!.signIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+        final authCredential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.idToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+        final UserCredential userCredential =
+            await _firebaseAuth.signInWithCredential(authCredential);
 
-      // If the user cancels the sign-in
-      if (googleUser == null) {
-        emit(const AuthFailure(error: "Authentication Error"));
-        return;
+        emit(AuthSuccess(uid: userCredential.user!.toString()));
       }
-
-      // Get authentication details from the Google user
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      // Create credentials using the Google authentication data
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      // Check if this is a new login or an existing login
-      if (isNewLogin) {
-        // Logic for handling new user account creation
-        // For now, we'll proceed with the usual sign-in process for new users as well.
-        // You may add additional actions here (e.g., saving new user data to Firestore or Firebase Database)
-      }
-
-      // Sign in with Firebase using the Google credentials
-      final userCredential =
-          await _firebaseAuth!.signInWithCredential(credential);
 
       // Emit the success state with the user UID
-      emit(AuthSuccess(uid: userCredential.user!.toString()));
     } catch (e) {
       emit(const AuthFailure(error: "Failed to sign in with Google"));
     }
@@ -58,8 +49,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     try {
-      await _firebaseAuth!.signOut();
-      await _googleSignIn!.signOut();
+      await _firebaseAuth.signOut();
+      await _googleSignIn.signOut();
       emit(AuthUnauthenticated());
     } catch (e) {
       emit(const AuthFailure(error: "Failed to sign out"));

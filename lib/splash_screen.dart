@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 duration: const Duration(seconds: 1),
                 child: Text(
                   'Areadr',
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Wait for 3 seconds and navigate based on authentication status
     Future.delayed(const Duration(seconds: 3), () {
       if (user != null) {
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/dashboard');
       } else {
         Navigator.pushReplacementNamed(context, '/login');
       }

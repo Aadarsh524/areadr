@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class AppThemes {
   static final ThemeData customLightTheme = ThemeData(
+    splashFactory: NoSplash.splashFactory, // Disable splash
+    highlightColor: Colors.transparent, // Remove highlight effect
     useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
@@ -48,22 +50,22 @@ class AppThemes {
       headlineMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 18,
+        fontSize: 16,
       ),
       titleMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
-        fontSize: 18,
+        fontSize: 16,
       ),
       bodyMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
-        fontSize: 18,
+        fontSize: 16,
       ),
       labelMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
-        fontSize: 18,
+        fontSize: 16,
       ),
       headlineSmall: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
@@ -94,6 +96,8 @@ class AppThemes {
 
   // Dark Theme with custom font
   static final ThemeData customDarkTheme = ThemeData(
+    splashFactory: NoSplash.splashFactory, // Disable splash
+    highlightColor: Colors.transparent, // Remove highlight effect
     useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: AppColors.primary,
@@ -138,22 +142,22 @@ class AppThemes {
       headlineMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.white,
-        fontSize: 18,
+        fontSize: 16,
       ),
       titleMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.primary,
-        fontSize: 18,
+        fontSize: 16,
       ),
       bodyMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.black,
-        fontSize: 18,
+        fontSize: 16,
       ),
       labelMedium: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
         color: AppColors.secondary,
-        fontSize: 18,
+        fontSize: 16,
       ),
       headlineSmall: TextStyle(
         fontFamily: CustomFonts.customFontFamily,
