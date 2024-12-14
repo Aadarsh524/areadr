@@ -2,9 +2,12 @@ import 'package:areadr/configs/localizations/localization_delegates.dart';
 import 'package:areadr/configs/routes.dart';
 import 'package:areadr/configs/themes/theme_service.dart';
 import 'package:areadr/configs/themes/themes.dart';
+import 'package:areadr/dashboard_screen.dart';
+import 'package:areadr/features/feed/cubit/feed_cubit.dart';
+import 'package:areadr/features/authentication/presentation/login_screen.dart';
 import 'package:areadr/firebase_options.dart';
-import 'package:areadr/layers/blocs/cubits/auth_cubit.dart';
-import 'package:areadr/splash_screen.dart';
+import 'package:areadr/features/authentication/cubit/auth_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthCubit(),
         ),
+        BlocProvider(
+          create: (context) => FeedNewsCubit(),
+        ),
       ],
       child: ValueListenableBuilder<ThemeMode>(
         valueListenable: themeService.themeNotifier,
@@ -52,7 +58,6 @@ class MyApp extends StatelessWidget {
             theme: AppThemes.customLightTheme,
             darkTheme: AppThemes.customDarkTheme,
             themeMode: themeMode,
-            initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRoutes.generateRoute,
             supportedLocales: const [
               Locale('en', ''),
@@ -63,10 +68,20 @@ class MyApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
-            home: const SplashScreen(),
+            home: _buildHome(),
           );
         },
       ),
     );
+  }
+}
+
+/// Check user authentication status
+Widget _buildHome() {
+  final user = FirebaseAuth.instance.currentUser; // Check the current user
+  if (user != null) {
+    return const DashboardScreen(); // User is logged in
+  } else {
+    return const LoginScreen(); // User not logged in
   }
 }

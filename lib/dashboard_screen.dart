@@ -1,9 +1,9 @@
 import 'package:areadr/cores/constants/colors.dart';
-import 'package:areadr/layers/presentation/bookedmark_screen.dart';
-import 'package:areadr/layers/presentation/areadr_screen.dart';
-import 'package:areadr/layers/presentation/news_player_screen.dart';
-import 'package:areadr/layers/presentation/search_screen.dart';
-import 'package:areadr/layers/presentation/side_menu_screen.dart';
+import 'package:areadr/features/bookmark/presentation/bookedmark_screen.dart';
+import 'package:areadr/areadr_screen.dart';
+import 'package:areadr/features/player/presentation/news_player_screen.dart';
+import 'package:areadr/features/search/presentation/search_screen.dart';
+import 'package:areadr/features/Sidebar/presentation/side_menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -66,11 +66,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               label: '', // No label
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.lyrics_rounded),
+              icon: Icon(Icons.lyrics_outlined),
               label: '', // No label
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_outlined),
+              icon: Icon(Icons.dynamic_feed_outlined),
               label: '', // No label
             ),
             BottomNavigationBarItem(

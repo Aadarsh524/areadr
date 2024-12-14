@@ -1,4 +1,4 @@
-import 'package:areadr/layers/blocs/cubits/auth_cubit.dart';
+import 'package:areadr/features/authentication/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
