@@ -1,9 +1,17 @@
 import 'package:areadr/cores/constants/colors.dart';
+import 'package:areadr/features/Sidebar/presentation/side_menu_screen.dart';
 import 'package:areadr/features/feed/presentation/feed_screen.dart';
 import 'package:flutter/material.dart';
 
-class AreadrScreen extends StatelessWidget {
+class AreadrScreen extends StatefulWidget {
   const AreadrScreen({super.key});
+
+  @override
+  State<AreadrScreen> createState() => _AreadrScreenState();
+}
+
+class _AreadrScreenState extends State<AreadrScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +19,18 @@ class AreadrScreen extends StatelessWidget {
         child: DefaultTabController(
       length: 2,
       child: Scaffold(
+        key: _scaffoldKey, // Use the GlobalKey for controlling the Scaffold
+        endDrawer: Drawer(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(0),
+              bottomLeft: Radius.circular(0),
+            ),
+          ),
+          elevation: 0,
+          width: MediaQuery.of(context).size.width * 0.80,
+          child: const SideMenuScreen(),
+        ),
         appBar: AppBar(
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.black,
@@ -30,15 +50,6 @@ class AreadrScreen extends StatelessWidget {
           centerTitle: true, // Centers the title
           actions: [
             IconButton(
-              icon: const Icon(Icons.add_outlined),
-              onPressed: () {
-                // Handle notifications button
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Notifications clicked!")),
-                );
-              },
-            ),
-            IconButton(
               icon: const Icon(Icons.more_horiz_outlined),
               onPressed: () {
                 // Handle settings button
@@ -47,16 +58,21 @@ class AreadrScreen extends StatelessWidget {
                 );
               },
             ),
+            IconButton(
+              icon: const Icon(Icons.add_outlined),
+              onPressed: () {
+                _scaffoldKey.currentState?.openEndDrawer();
+              },
+            ),
           ],
           elevation: 0, // Adds a shadow
-          bottom: TabBar(
-            dividerColor: AppColors.secondary,
-            indicatorWeight: 0.5, // Thickness of the indicator line
-            indicatorSize: TabBarIndicatorSize.tab, // Size of the indicator
-
-            unselectedLabelStyle: Theme.of(context).textTheme.labelSmall,
-            labelStyle: Theme.of(context).textTheme.labelSmall,
-            tabs: const [
+          bottom: const TabBar(
+            isScrollable: false,
+            indicatorColor: AppColors.primary,
+            indicatorWeight: 3, // A more prominent indicator
+            unselectedLabelColor: AppColors.secondary,
+            labelColor: AppColors.primary,
+            tabs: [
               Tab(
                 text: 'My Feed',
               ),
@@ -64,7 +80,6 @@ class AreadrScreen extends StatelessWidget {
                 text: 'Explore More',
               ),
             ],
-            indicatorColor: AppColors.secondary, // Highlight color
           ),
         ),
         body: Padding(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class SourcesScreen extends StatefulWidget {
+  const SourcesScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SourcesScreen> createState() => _SourcesScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SourcesScreenState extends State<SourcesScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -17,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
           onPressed: () {
             // Sign out logic here
           },
-          child: const Text('signOut'),
+          child: const Text('All Sources'),
         ),
       ),
     ));
